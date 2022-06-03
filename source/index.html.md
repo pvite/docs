@@ -17,10 +17,10 @@ code_clipboard: false
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Legalbox API
 ---
 
-# Scraper API
+# Legalbox API
 
 > Base URL: https://api.legalbox.cl/
 
@@ -32,9 +32,7 @@ meta:
 429 - Too many requests, too quickly.
 ```
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-
+<!-- Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
 
 # Authentication
 
@@ -43,11 +41,6 @@ Welcome to the Kittn API! You can use our API to access Kittn API endpoints, whi
 Incluir el Token para cada endpoint con el siguiente formato:
 
 `curl -H 'Authorization: {token}' https://api.legalbox.cl/`
-
-
-<aside class="notice">
-Todas las request deben tener 
-</aside>
 
 
 # Requests
