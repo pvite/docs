@@ -9,7 +9,8 @@
             name="description"
             content="Documentation for the Legalbox API"
         >
-    <title>Legalbox API Reference</title>
+    <link rel="shortcut icon" href="images/Favicon-lb-f1b2b84d.svg">
+    <title>API Legalbox</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -317,7 +318,7 @@
         </div>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#legalbox-api" class="toc-h1 toc-link" data-title="Legalbox API">Legalbox API</a>
+            <a href="#input-legal" class="toc-h1 toc-link" data-title="Input legal">Input legal</a>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -334,10 +335,10 @@
                     <a href="#crear-una-nueva-request" class="toc-h2 toc-link" data-title="Crear una nueva request">Crear una nueva request</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-request" class="toc-h2 toc-link" data-title="Get a specific Request">Get a specific Request</a>
+                    <a href="#obtener-un-request-especifico" class="toc-h2 toc-link" data-title="Obtener un Request específico">Obtener un Request específico</a>
                   </li>
                   <li>
-                    <a href="#get-all-the-requests" class="toc-h2 toc-link" data-title="Get all the Requests">Get all the Requests</a>
+                    <a href="#obtener-todos-mis-requests" class="toc-h2 toc-link" data-title="Obtener todos mis Requests">Obtener todos mis Requests</a>
                   </li>
               </ul>
           </li>
@@ -346,7 +347,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='legalbox-api'>Legalbox API</h1>
+        <h1 id='input-legal'>Input legal</h1>
 <blockquote>
 <p>Base URL: https://api.legalbox.cl/</p>
 </blockquote>
@@ -356,12 +357,16 @@
 404 - Not Found.
 429 - Too many requests, too quickly.
 </code></pre></div>
-<!-- Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
+<p>La API Input legal permite realizar consultas (requests), sobre personas naturales o jurídicas para obtener información de riesgo.</p>
 <h1 id='authentication'>Authentication</h1><h2 id='token'>Token</h2>
 <p>Incluir el Token para cada endpoint con el siguiente formato:</p>
 
-<p><code>curl -H &#39;Authorization: {token}&#39; https://api.legalbox.cl/</code></p>
-<h1 id='requests'>Requests</h1><h2 id='crear-una-nueva-request'>Crear una nueva request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/v1/s/requests/?tipo=juridico&amp;rut=60450260k"</span> <span class="se">\</span>
+<p><code>curl -H &#39;Authorization: {token}&#39; {URL}</code></p>
+<h1 id='requests'>Requests</h1><h2 id='crear-una-nueva-request'>Crear una nueva request</h2>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> POST <span class="s2">"https://api.legalbox.cl/s/requests/?tipo=juridico&amp;rut=60450260k"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: AUTH_TOKEN"</span>
 </code></pre></div>
 <blockquote>
@@ -373,9 +378,11 @@
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"request created"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Los parámetros &#39;nombre&#39;, &#39;apellido_paterno&#39;, &#39;apellido_materno&#39; no son necesarios si el &#39;tipo&#39; de persona es jurídica.</p>
+<p>Al generar una Request se gatilla la búsqueda de la persona (parámetros ingresados) y se le asigna el ID que va en el response de esta request (ver ejemplo).</p>
+
+<p>Este ID (request_id) es el mismo que se usa <a href="#obtener-un-request-especifico">más adelante</a> para consultar el estado de la búsqueda.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://api.legalbox.cl/v1/s/requests</code></p>
+<p><code>POST https://api.legalbox.cl/s/requests</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -411,10 +418,12 @@
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-request'>Get a specific Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/v1/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a"</span> <span class="se">\</span>
+<aside class="notice">Para persona jurídica no es necesario ingresar nombre y apellidos</aside>
+<h2 id='obtener-un-request-especifico'>Obtener un Request específico</h2>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: AUTH_TOKEN"</span>
 </code></pre></div>
 <blockquote>
@@ -428,15 +437,11 @@ Remember — a happy kitten is an authenticated kitten!
       </span><span class="nl">"rut"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93307000k"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1320</span><span class="w">
+    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">630</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves a specific Request information.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://api.legalbox.cl/v1/s/requests/&lt;REQUEST_ID&gt;</code></p>
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.legalbox.cl/s/requests/&lt;REQUEST_ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -451,7 +456,11 @@ Remember — a happy kitten is an authenticated kitten!
 <td>ID de la Request</td>
 </tr>
 </tbody></table>
-<h2 id='get-all-the-requests'>Get all the Requests</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/api/kittens/2"</span> <span class="se">\</span>
+<h2 id='obtener-todos-mis-requests'>Obtener todos mis Requests</h2>
+<blockquote>
+<p>Example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/s/requests"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: AUTH_TOKEN"</span>
 </code></pre></div>
 <blockquote>
@@ -467,9 +476,7 @@ Remember — a happy kitten is an authenticated kitten!
       </span><span class="nl">"dv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -484,17 +491,13 @@ Remember — a happy kitten is an authenticated kitten!
       </span><span class="nl">"apellido_materno"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perez"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-
-    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">945</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
-</span></code></pre></div>
-<p>This endpoint retrieves all the requests made.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET https://api.legalbox.cl/v1/s/requests</code></p>
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.legalbox.cl/s/requests</code></p>
 <h3 id='response'>Response</h3>
 <table><thead>
 <tr>
@@ -552,6 +555,11 @@ Remember — a happy kitten is an authenticated kitten!
 <td>time</td>
 <td>(integer)</td>
 <td>Duración de la Request en segundos</td>
+</tr>
+<tr>
+<td>count</td>
+<td>(integer)</td>
+<td>Número de causas encontradas</td>
 </tr>
 </tbody></table>
 <!-- # Errors
