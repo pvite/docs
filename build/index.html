@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the Kittn API"
+            content="Documentation for the Legalbox API"
         >
     <title>Legalbox API Reference</title>
 
@@ -317,7 +317,7 @@
         </div>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#scraper-api" class="toc-h1 toc-link" data-title="Scraper API">Scraper API</a>
+            <a href="#legalbox-api" class="toc-h1 toc-link" data-title="Legalbox API">Legalbox API</a>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -346,7 +346,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='scraper-api'>Scraper API</h1>
+        <h1 id='legalbox-api'>Legalbox API</h1>
 <blockquote>
 <p>Base URL: https://api.legalbox.cl/</p>
 </blockquote>
@@ -356,15 +356,11 @@
 404 - Not Found.
 429 - Too many requests, too quickly.
 </code></pre></div>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<!-- Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
 <h1 id='authentication'>Authentication</h1><h2 id='token'>Token</h2>
 <p>Incluir el Token para cada endpoint con el siguiente formato:</p>
 
 <p><code>curl -H &#39;Authorization: {token}&#39; https://api.legalbox.cl/</code></p>
-
-<aside class="notice">
-Todas las request deben tener 
-</aside>
 <h1 id='requests'>Requests</h1><h2 id='crear-una-nueva-request'>Crear una nueva request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.legalbox.cl/v1/s/requests/?tipo=juridico&amp;rut=60450260k"</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Authorization: AUTH_TOKEN"</span>
 </code></pre></div>

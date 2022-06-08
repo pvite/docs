@@ -1,5 +1,5 @@
 ---
-title: Legalbox API Reference
+title: API Legalbox
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -20,7 +20,7 @@ meta:
     content: Documentation for the Legalbox API
 ---
 
-# Legalbox API
+# Input legal
 
 > Base URL: https://api.legalbox.cl/
 
@@ -32,7 +32,7 @@ meta:
 429 - Too many requests, too quickly.
 ```
 
-<!-- Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database. -->
+La API Input legal permite realizar consultas (requests), sobre personas naturales o jurídicas para obtener información de riesgo.
 
 # Authentication
 
@@ -40,16 +40,16 @@ meta:
 
 Incluir el Token para cada endpoint con el siguiente formato:
 
-`curl -H 'Authorization: {token}' https://api.legalbox.cl/`
-
+`curl -H 'Authorization: {token}' {URL}`
 
 # Requests
 
 ## Crear una nueva request
 
+> Example
 
 ```shell
-curl "https://api.legalbox.cl/v1/s/requests/?tipo=juridico&rut=60450260k" \
+curl -X POST "https://api.legalbox.cl/s/requests/?tipo=juridico&rut=60450260k" \
   -H "Authorization: AUTH_TOKEN"
 ```
 
@@ -63,12 +63,15 @@ curl "https://api.legalbox.cl/v1/s/requests/?tipo=juridico&rut=60450260k" \
 }
 ```
 
-Los parámetros 'nombre', 'apellido_paterno', 'apellido_materno' no son necesarios si el 'tipo' de persona es jurídica.
+Al generar una Request se gatilla la búsqueda de la persona (parámetros ingresados) y se le asigna el ID que va en el response de esta request (ver ejemplo).
+
+Este ID (request_id) es el mismo que se usa <a href="#obtener-un-request-especifico">más adelante</a> para consultar el estado de la búsqueda.
+
 
 
 ### HTTP Request
 
-`POST https://api.legalbox.cl/v1/s/requests`
+`POST https://api.legalbox.cl/s/requests`
 
 ### Query Parameters
 
@@ -80,14 +83,14 @@ nombre | (string) | Nombre de la persona natural
 apellido_paterno | (string) | Apellido paterno de la persona natural
 apellido_materno | (string) | Apellido materno de la persona natural
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<aside class="notice">Para persona jurídica no es necesario ingresar nombre y apellidos</aside>
 
-## Get a specific Request
+## Obtener un Request específico
+
+> Example
 
 ```shell
-curl "https://api.legalbox.cl/v1/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a" \
+curl "https://api.legalbox.cl/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a" \
   -H "Authorization: AUTH_TOKEN"
 ```
 
@@ -102,18 +105,14 @@ curl "https://api.legalbox.cl/v1/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a
       "rut": "93307000k",
     },
     "status": "done",
-    "result": [
-
-    ],
-    "time": 1320
+    "count": 4,
+    "time": 630
 }
 ```
 
-This endpoint retrieves a specific Request information.
-
 ### HTTP Request
 
-`GET https://api.legalbox.cl/v1/s/requests/<REQUEST_ID>`
+`GET https://api.legalbox.cl/s/requests/<REQUEST_ID>`
 
 ### URL Parameters
 
@@ -122,10 +121,12 @@ Parameter | Type | Description
 REQUEST_ID | (string) | ID de la Request
 
 
-## Get all the Requests
+## Obtener todos mis Requests
+
+> Example
 
 ```shell
-curl "https://api.legalbox.cl/api/kittens/2" \
+curl "https://api.legalbox.cl/s/requests" \
   -H "Authorization: AUTH_TOKEN"
 ```
 
@@ -142,9 +143,7 @@ curl "https://api.legalbox.cl/api/kittens/2" \
       "dv": "k"
     },
     "status": "done",
-    "result": [
-
-    ],
+    "count": 4,
     "time": 1200
   },
   {
@@ -159,21 +158,16 @@ curl "https://api.legalbox.cl/api/kittens/2" \
       "apellido_materno": "Perez"
     },
     "status": "done",
-    "result": [
-
-    ],
+    "count": 0,
     "time": 945
   }
 ]
 
 ```
 
-This endpoint retrieves all the requests made.
-
-
 ### HTTP Request
 
-`GET https://api.legalbox.cl/v1/s/requests`
+`GET https://api.legalbox.cl/s/requests`
 
 
 ### Response
@@ -190,6 +184,7 @@ nombre | (string) | Nombre de la persona natural
 apellido_paterno | (string) | Apellido paterno de la persona natural
 apellido_materno | (string) | Apellido materno de la persona natural
 time | (integer) | Duración de la Request en segundos
+count | (integer)| Número de causas encontradas
 
 
 
