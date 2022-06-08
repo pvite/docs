@@ -63,7 +63,7 @@ curl -X POST "https://api.legalbox.cl/s/requests/?tipo=juridico&rut=60450260k" \
 }
 ```
 
-Al generar una Request se gatilla la búsqueda de la persona (parámetros ingresados) y se le asigna el ID que va en el response de esta request (ver ejemplo).
+Al generar una nueva request se inicia la búsqueda para encontrar el número de causas judiciales con los parámetros ingresados. También se asigna un ID que va en el response de esta Request.
 
 Este ID (request_id) es el mismo que se usa <a href="#obtener-un-request-especifico">más adelante</a> para consultar el estado de la búsqueda.
 
