@@ -106,6 +106,8 @@ curl "https://api.legalbox.cl/s/requests/d4f0d7f0-79f2-49c0-845c-a92b67c8995a" \
       "dv": "k"
     },
     "status": "done",
+    "batch1": "passed",
+    "batch2": "passed",
     "count": 4,
     "time": 630
 }
@@ -126,17 +128,19 @@ REQUEST_ID | (string) | ID de la Request
 
 Parameter | Type | Description
 --------- | ------ | -----------
-request_id | (string) | ID de la Request
-created_at | (integer) | Fecha creación de la Request
-status | (string) | Estado de la Request
-tipo | (string) | Tipo de persona
-rut | (string) | R.U.T de la persona
-dv | (string) | Dígito verificador de la persona
-nombre | (string) | Nombre de la persona natural
-apellido_paterno | (string) | Apellido paterno de la persona natural
-apellido_materno | (string) | Apellido materno de la persona natural
-time | (integer) | Duración de la Request en segundos
-count | (integer)| Número de causas encontradas
+"request_id" | (string) | ID de la Request
+"created_at" | (integer) | Fecha creación de la Request
+"status" | (string) | Estado de la Request
+"tipo" | (string) | Tipo de persona
+"rut" | (string) | R.U.T de la persona
+"dv" | (string) | Dígito verificador de la persona
+"nombre" | (string) | Nombre de la persona natural
+"apellido_paterno" | (string) | Apellido paterno de la persona natural
+"apellido_materno" | (string) | Apellido materno de la persona natural
+"time" | (integer) | Duración de la Request en segundos
+"count" | (integer)| Número de causas encontradas
+"batch1" | (string)| Estado de batch1 (varía entre passed/failed)
+"batch2" | (string)| Estado de batch2 (varía entre passed/failed)
 
 
 
@@ -163,6 +167,8 @@ curl "https://api.legalbox.cl/s/requests" \
       "dv": "k"
     },
     "status": "done",
+    "batch1": "passed",
+    "batch2": "passed",
     "count": 4,
     "time": 1200
   },
@@ -178,6 +184,8 @@ curl "https://api.legalbox.cl/s/requests" \
       "apellido_materno": "Perez"
     },
     "status": "done",
+    "batch1": "passed",
+    "batch2": "passed",
     "count": 0,
     "time": 945
   }
@@ -194,18 +202,19 @@ curl "https://api.legalbox.cl/s/requests" \
 
 Parameter | Type | Description
 --------- | ------ | -----------
-request_id | (string) | ID de la Request
-created_at | (integer) | Fecha creación de la Request
-status | (string) | Estado de la Request
-tipo | (string) | Tipo de persona
-rut | (string) | R.U.T de la persona
-dv | (string) | Dígito verificador de la persona
-nombre | (string) | Nombre de la persona natural
-apellido_paterno | (string) | Apellido paterno de la persona natural
-apellido_materno | (string) | Apellido materno de la persona natural
-time | (integer) | Duración de la Request en segundos
-count | (integer)| Número de causas encontradas
-
+"request_id" | (string) | ID de la Request
+"created_at" | (integer) | Fecha creación de la Request
+"status" | (string) | Estado de la Request
+"tipo" | (string) | Tipo de persona
+"rut" | (string) | R.U.T de la persona
+"dv" | (string) | Dígito verificador de la persona
+"nombre" | (string) | Nombre de la persona natural
+"apellido_paterno" | (string) | Apellido paterno de la persona natural
+"apellido_materno" | (string) | Apellido materno de la persona natural
+"time" | (integer) | Duración de la Request en segundos
+"count" | (integer)| Número de causas encontradas
+"batch1" | (string)| Estado de batch1 (passed/failed)
+"batch2" | (string)| Estado de batch2 (passed/failed)
 
 
 
