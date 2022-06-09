@@ -20,7 +20,7 @@ meta:
     content: Documentation for the Legalbox API
 ---
 
-# Input legal
+# Input legal (BETA)
 
 > Base URL: https://api.legalbox.cl/
 
