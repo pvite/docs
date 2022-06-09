@@ -40,7 +40,7 @@ La API Input legal permite realizar consultas (requests), sobre personas natural
 
 Incluir el Token para cada endpoint con el siguiente formato:
 
-`curl -H 'Authorization: {token}' {URL}`
+`curl -H 'Authorization: {AUTH_TOKEN}' {URL}`
 
 # Requests
 
